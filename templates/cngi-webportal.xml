@@ -20,7 +20,7 @@
   <DonateText/>
   <DonateLink/>
   <Requires/>
-  <Config Name="WebUI Port" Target="8080" Default="8190" Mode="tcp" Description="Host port used to open CNGI WebPortal. Container port remains 8080." Type="Port" Display="always" Required="true" Mask="false">8190</Config>
+  <Config Name="WebUI Port" Target="8080" Default="8187" Mode="tcp" Description="Host port used to open CNGI WebPortal. Container port remains 8080." Type="Port" Display="always" Required="true" Mask="false">8187</Config>
   <Config Name="Login URL" Target="LOGIN_URL" Default="" Mode="" Description="Authentik or portal login destination. Leave blank until the production login route is configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="Service Request URL" Target="SERVICE_REQUEST_URL" Default="" Mode="" Description="Destination for Request Service. Leave blank until the Core-backed intake workflow is configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
 </Container>
