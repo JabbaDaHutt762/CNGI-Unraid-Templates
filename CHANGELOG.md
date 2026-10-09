@@ -12,7 +12,7 @@
 ### WebPortal fresh-install payload
 - GHCR image.
 - Bridge networking.
-- 8190 -> 8080 WebUI port.
+- 8187 -> 8080 WebUI port.
 - LOGIN_URL.
 - SERVICE_REQUEST_URL.
 - Project/support/registry metadata.
@@ -27,3 +27,6 @@ None. This repository contains deployment metadata only.
 - Copied CNGI icon, logo and favicon byte-for-byte from Time & Access into this public catalog.
 - Updated Core, Time and WebPortal templates to use the public catalog-hosted CNGI icon.
 - Updated all canonical TemplateURL values to this public repository.
+
+### Corrected
+- Changed the WebPortal default host port from 8190 to 8187 after verifying Jarvis port assignments. Container port remains 8080; host 8080 is already assigned to Open WebUI.
