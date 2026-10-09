@@ -25,7 +25,7 @@ This catalog supplies Unraid's initial container form. It does not embed secrets
 - CNGI-WebPortal
 - ghcr.io/jabbadahutt762/cngi-webportal:latest
 - bridge
-- 8190 -> 8080
+- 8187 -> 8080
 - LOGIN_URL and SERVICE_REQUEST_URL optional/blank
 - no appdata/database mapping in v0.1.0
 
