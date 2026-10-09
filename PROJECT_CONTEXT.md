@@ -3,27 +3,31 @@
 Last updated: 2026-10-09
 
 ## Current state
-This is the public deployment-template repository for the CNGI ecosystem.
+This public repository is the canonical fresh-install deployment catalog for all three current CNGI applications.
 
-### CNGI WebPortal
-Canonical template: `templates/cngi-webportal.xml`
+### Canonical templates
+- `templates/cngi-core.xml` — copied from the existing Core production template; public TemplateURL/icon centralized here.
+- `templates/cngi-time-access.xml` — copied from the existing Time & Access production template; public TemplateURL/icon centralized here.
+- `templates/cngi-webportal.xml` — WebPortal v0.1.0 fresh-install template.
 
-Fresh-install defaults:
-- Container: CNGI-WebPortal
-- Image: ghcr.io/jabbadahutt762/cngi-webportal:latest
-- Network: bridge
-- Host WebUI port: 8190
-- Container HTTP port: 8080
-- LOGIN_URL: optional/blank until Authentik routing is configured
-- SERVICE_REQUEST_URL: optional/blank until Core intake is configured
-- Public icon: time.clemonsnextgen.com static CNGI icon
-- No appdata/database path in WebPortal v0.1.0 because the application is intentionally stateless.
+### Public branding
+The canonical icon and supporting branding files were copied byte-for-byte from the Time & Access repository:
+- `icons/cngi-icon-v2.webp`
+- `icons/cngi-logo-v2.webp`
+- `icons/cngi-favicon.png`
 
-### CNGI Core
-Existing application. Its current production Unraid configuration must be audited before publishing a canonical template here. Do not infer credentials or deployment settings.
+All templates use the public raw URL for `icons/cngi-icon-v2.webp`.
 
-### CNGI Time & Access
-Existing application. Its current production Unraid configuration must be audited before publishing a canonical template here. Do not infer credentials or deployment settings.
+### Important behavior
+This catalog supplies Unraid's initial container form. It does not embed secrets. Existing production containers keep their current environment values when updated; a fresh Core or Time install still requires administrator-specific database/Auth credentials.
+
+### WebPortal defaults
+- CNGI-WebPortal
+- ghcr.io/jabbadahutt762/cngi-webportal:latest
+- bridge
+- 8190 -> 8080
+- LOGIN_URL and SERVICE_REQUEST_URL optional/blank
+- no appdata/database mapping in v0.1.0
 
 ## Exact next step
-Install the WebPortal template into Unraid's DockerMan templates-user directory, then create CNGI-WebPortal from that template and verify the generated container configuration.
+Install/refresh these XML files in Unraid DockerMan `templates-user`, then create WebPortal from the canonical template and verify its generated container definition.
