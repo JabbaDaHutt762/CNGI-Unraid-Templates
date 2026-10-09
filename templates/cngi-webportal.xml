@@ -12,7 +12,7 @@
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-webportal.xml</TemplateURL>
-  <Icon>https://time.clemonsnextgen.com/static/branding/cngi-icon-v2.webp</Icon>
+  <Icon>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/icons/cngi-icon-v2.webp</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>
