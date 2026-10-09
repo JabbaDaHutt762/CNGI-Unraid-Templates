@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>CNGI-Time-Access</Name>
+  <Repository>ghcr.io/jabbadahutt762/jarvis-cngi-time-access:latest</Repository>
+  <Registry>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Time-Access/pkgs/container/jarvis-cngi-time-access</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Time-Access</Support>
+  <Project>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Time-Access</Project>
+  <Overview>CNGI Time &amp; Access. Image updates automatically create source/database backups and apply pending migrations before the app starts.</Overview>
+  <Category>Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8188]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-time-access.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/icons/cngi-icon-v2.webp</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+
+  <Config Name="Web Port" Target="8188" Default="8188" Mode="tcp" Description="CNGI Time &amp; Access web port" Type="Port" Display="always" Required="true" Mask="false">8188</Config>
+  <Config Name="Persistent Update State" Target="/config" Default="/mnt/user/appdata/cngi-time-access-state" Mode="rw" Description="Stores deployed image SHA so backups/migrations run once per image update." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/cngi-time-access-state</Config>
+  <Config Name="Deployment Backups" Target="/backups" Default="/mnt/remotes/TOWER_Jarvis_Backups/CNGI-Time-Access" Mode="rw" Description="Tower-backed source image and PostgreSQL backups created before each image update. Update fails if this is not a remote filesystem." Type="Path" Display="always" Required="true" Mask="false">/mnt/remotes/TOWER_Jarvis_Backups/CNGI-Time-Access</Config>
+
+  <Config Name="DB Host" Target="DB_HOST" Default="" Mode="" Description="PostgreSQL host/container address" Type="Variable" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="DB Port" Target="DB_PORT" Default="5433" Mode="" Description="PostgreSQL port" Type="Variable" Display="always" Required="true" Mask="false">5433</Config>
+  <Config Name="DB Name" Target="DB_NAME" Default="cngi_core" Mode="" Description="Application database" Type="Variable" Display="always" Required="true" Mask="false">cngi_core</Config>
+  <Config Name="Application DB User" Target="DB_USER" Default="cngi_time_app" Mode="" Description="Least-privilege runtime database user" Type="Variable" Display="always" Required="true" Mask="false">cngi_time_app</Config>
+  <Config Name="Application DB Password" Target="DB_PASSWORD" Default="" Mode="" Description="Runtime DB password" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Migration DB User" Target="MIGRATION_DB_USER" Default="cngi_admin" Mode="" Description="Database owner/admin used only at image startup for backup and migrations" Type="Variable" Display="always" Required="true" Mask="false">cngi_admin</Config>
+  <Config Name="Migration DB Password" Target="MIGRATION_DB_PASSWORD" Default="" Mode="" Description="Database owner/admin password used for safe update migrations" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Require Remote Backup" Target="REQUIRE_REMOTE_BACKUP" Default="true" Mode="" Description="Refuse managed updates unless /backups is a remote filesystem such as Tower SMB/NFS." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+
+  <Config Name="Timezone" Target="APP_TIMEZONE" Default="America/New_York" Mode="" Description="Application timezone" Type="Variable" Display="advanced" Required="true" Mask="false">America/New_York</Config>
+  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Long random session secret" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Authentik Enabled" Target="AUTHENTIK_ENABLED" Default="true" Mode="" Description="Enable Authentik SSO" Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Authentik Issuer" Target="AUTHENTIK_ISSUER" Default="" Mode="" Description="OIDC issuer URL" Type="Variable" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="Authentik Client ID" Target="AUTHENTIK_CLIENT_ID" Default="" Mode="" Description="OIDC client ID" Type="Variable" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="Authentik Client Secret" Target="AUTHENTIK_CLIENT_SECRET" Default="" Mode="" Description="OIDC client secret" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Authentik API Token" Target="AUTHENTIK_API_TOKEN" Default="" Mode="" Description="API token used only for one-way CNGI employee identity sync to Authentik" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="Authentik Redirect URI" Target="AUTHENTIK_REDIRECT_URI" Default="" Mode="" Description="Public callback URL ending in /auth/callback" Type="Variable" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="Authentik Admin Group" Target="AUTHENTIK_ADMIN_GROUP" Default="CNGI Time Admins" Mode="" Description="Authentik management group" Type="Variable" Display="advanced" Required="true" Mask="false">CNGI Time Admins</Config>
+  <Config Name="Authentik Employee Group" Target="AUTHENTIK_EMPLOYEE_GROUP" Default="CNGI Time Employees" Mode="" Description="Authentik employee group" Type="Variable" Display="advanced" Required="true" Mask="false">CNGI Time Employees</Config>
+</Container>
