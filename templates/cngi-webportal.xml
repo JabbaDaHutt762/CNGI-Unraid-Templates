@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>CNGI-WebPortal</Name>
+  <Repository>ghcr.io/jabbadahutt762/cngi-webportal:latest</Repository>
+  <Registry>https://github.com/JabbaDaHutt762/CNGI-WebPortal/pkgs/container/cngi-webportal</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JabbaDaHutt762/CNGI-WebPortal</Support>
+  <Project>https://www.clemonsac.com</Project>
+  <Overview>Public website and secure portal entry point for Robert Clemons A/C and Clemons NextGen Integrations. Provides the public website now and is the foundation for authenticated customer and employee portal experiences.</Overview>
+  <Category>Productivity: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-webportal.xml</TemplateURL>
+  <Icon>https://time.clemonsnextgen.com/static/branding/cngi-icon-v2.webp</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled></DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="WebUI Port" Target="8080" Default="8190" Mode="tcp" Description="Host port used to open CNGI WebPortal. Container port remains 8080." Type="Port" Display="always" Required="true" Mask="false">8190</Config>
+  <Config Name="Login URL" Target="LOGIN_URL" Default="" Mode="" Description="Authentik or portal login destination. Leave blank until the production login route is configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="Service Request URL" Target="SERVICE_REQUEST_URL" Default="" Mode="" Description="Destination for Request Service. Leave blank until the Core-backed intake workflow is configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+</Container>
