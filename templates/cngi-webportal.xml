@@ -7,14 +7,14 @@
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <Support>https://github.com/JabbaDaHutt762/CNGI-WebPortal</Support>
-  <Project>https://www.clemonsac.com</Project>
+  <Project>https://clemonsnextgen.com</Project>
   <Overview>Public website and secure portal entry point for Robert Clemons A/C and Clemons NextGen Integrations.</Overview>
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <Icon>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/icons/cngi-icon-v2.webp</Icon>
   <Config Name="WebUI Port" Target="8080" Default="8190" Mode="tcp" Description="CNGI WebPortal HTTP port" Type="Port" Display="always" Required="true" Mask="false">8190</Config>
   <Config Name="Service Request URL" Target="SERVICE_REQUEST_URL" Default="" Mode="" Description="Core-backed service request destination. Leave blank until configured." Type="Variable" Display="always" Required="false" Mask="false"></Config>
-  <Config Name="Public Base URL" Target="PUBLIC_BASE_URL" Default="https://www.clemonsac.com" Mode="" Description="Canonical public URL used for the Authentik OIDC callback." Type="Variable" Display="always" Required="true" Mask="false">https://www.clemonsac.com</Config>
+  <Config Name="Public Base URL" Target="PUBLIC_BASE_URL" Default="https://clemonsnextgen.com" Mode="" Description="Canonical public URL used for the Authentik OIDC callback." Type="Variable" Display="always" Required="true" Mask="false">https://clemonsnextgen.com</Config>
   <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Long random secret used to sign WebPortal sessions." Type="Variable" Display="always" Required="true" Mask="true"></Config>
   <Config Name="Authentik Base URL" Target="AUTHENTIK_BASE_URL" Default="" Mode="" Description="Public HTTPS base URL for Authentik." Type="Variable" Display="always" Required="true" Mask="false"></Config>
   <Config Name="Authentik Client ID" Target="AUTHENTIK_CLIENT_ID" Default="" Mode="" Description="OIDC client ID for the cngi-webportal Authentik provider." Type="Variable" Display="always" Required="true" Mask="false"></Config>
