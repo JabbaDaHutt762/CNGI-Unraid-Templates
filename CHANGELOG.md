@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-10-10
+- Corrected CNGI-WebPortal canonical host mapping to `8190 -> 8080` to match production.
+
+
 ## 2026-10-09
 
 ### Added
@@ -12,7 +16,7 @@
 ### WebPortal fresh-install payload
 - GHCR image.
 - Bridge networking.
-- 8187 -> 8080 WebUI port.
+- 8190 -> 8080 WebUI port.
 - LOGIN_URL.
 - SERVICE_REQUEST_URL.
 - Project/support/registry metadata.
@@ -29,4 +33,4 @@ None. This repository contains deployment metadata only.
 - Updated all canonical TemplateURL values to this public repository.
 
 ### Corrected
-- Changed the WebPortal default host port from 8190 to 8187 after verifying Jarvis port assignments. Container port remains 8080; host 8080 is already assigned to Open WebUI.
+- Changed the WebPortal default host port from 8190 to 8190 after verifying Jarvis port assignments. Container port remains 8080; host 8080 is already assigned to Open WebUI.
