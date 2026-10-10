@@ -8,7 +8,7 @@ Public Unraid deployment catalog for the Clemons NextGen Integrations applicatio
 |---|---|---:|---|
 | CNGI Core | `ghcr.io/jabbadahutt762/jarvis-cngi-core:latest` | 8189 | Ready |
 | CNGI Time & Access | `ghcr.io/jabbadahutt762/jarvis-cngi-time-access:latest` | 8188 | Ready |
-| CNGI WebPortal | `ghcr.io/jabbadahutt762/cngi-webportal:latest` | 8187 | Ready |
+| CNGI WebPortal | `ghcr.io/jabbadahutt762/cngi-webportal:latest` | 8190 | Ready |
 
 This repository contains **deployment metadata only**. It contains no application source code and no secrets.
 
