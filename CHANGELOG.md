@@ -1,3 +1,9 @@
+## 2026-10-18 — Draft Core Time/HR merger template (not released)
+- Added disabled-by-default embedded Time & HR integration and worker handoff switches to the Core Unraid template.
+- Added optional existing Time DB URL, Calendar encryption key, Authentik employee-sync token/issuer, Google callback and remote Tower backup mount.
+- Preserves existing Time and Core templates; no running Unraid container or database changed. Accompanies Core draft PR #36.
+- **Limitations:** Core does not yet implement Time's complete automatic backup/migration startup; mount is a prerequisite, not a replacement. Do not start concurrent Time workers.
+
 # Changelog
 
 ## 2026-10-10
