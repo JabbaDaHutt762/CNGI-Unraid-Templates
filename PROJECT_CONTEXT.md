@@ -1,6 +1,14 @@
+## 2026-10-18 — Staged Core + Time Docker consolidation (draft PR #1)
+- Companion to Core draft PR #36 (feature/consolidate-time-into-core-20261018): owner wants Time employee/HR, clock, payroll and billing integrated in Core, retaining the SAME PostgreSQL cngi_core tables/rows. Time Docker stays running until owner validates.
+- Core template now stages opt-in CNGI_EMBEDDED_TIME_ENABLED (default false), optional TIME_DATABASE_URL for existing Time least-privilege DB credentials, CALENDAR_SECRET_KEY carrying forward Time's encryption secret, employee Authentik API token/issuer, Google OAuth callback override, and Core time-worker toggle (default false).
+- IMPORTANT: Never enable CNGI_CORE_TIME_WORKERS_ENABLED while old Time container still runs. Requires controlled worker handover after Time stops, to avoid duplicate Calendar processing or Authentik changes.
+- Added optional remote Tower /backups mount to Core. This **does not** itself implement Time's old automatic image-update database backup/migration runner. Verify Tower backup/restore separately before any update.
+- No secrets in repo, no data changes, no user Unraid template replaced; changes live on review branch only.
+- Current next step: review/validate Core PR, HR/time permission model and CI, verify backups, then deploy opt-in for trial. Do not delete existing Time template yet.
+
 # CNGI Unraid Templates — Project Context
 
-Last updated: 2026-10-09
+Last updated: 2026-10-18
 
 ## Current state
 This public repository is the canonical fresh-install deployment catalog for all three current CNGI applications.
