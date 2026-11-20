@@ -29,13 +29,14 @@ Never commit passwords, tokens, API keys, database passwords, private hostnames,
 
 ## CNGI Trades install
 
-CNGI Trades uses its own PostgreSQL 18 database and Authentik application, with
-public HTTPS at `trades.clemonsnextgen.com`. The container is read-only
-for broker data in v0.1.2 (no trades). Unraid DockerMan template and exact
-installation steps:
+CNGI Trades now launches with just port **8191** and persistent appdata
+(`/mnt/user/appdata/cngi-trades`). It automatically creates a local SQLite
+database and its secrets. Authentik is configured from the application's
+initial `/setup` page; individual paper brokerage accounts are added later.
+The trading engine remains disabled. Installation links:
 
 - [CNGI Trades Unraid template](templates/cngi-trades.xml)
-- [Download, create separate database and configure Authentik](docs/cngi-trades-unraid-install.md)
+- [Download simple template and configure Authentik after launch](docs/cngi-trades-unraid-install.md)
 
 The Trades app source and GHCR package live in the private
 [JabbaDaHutt762/CNGI-Trades repository](https://github.com/JabbaDaHutt762/CNGI-Trades).
