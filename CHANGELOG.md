@@ -1,3 +1,9 @@
+## 2026-11-20 — CNGI Trades Unraid install support
+- Added `templates/cngi-trades.xml` DockerMan v2 template for test-gated GHCR `latest` image.
+- Maps Unraid 8191 to application 8080 with isolated PostgreSQL 18 database and Authentik connection fields.
+- Added step-by-step Unraid install guide under `docs/cngi-trades-unraid-install.md`.
+- No credentials or customer information added. No running Unraid service or database was changed.
+
 ## 2026-10-18 — Draft Core Time/HR merger template (not released)
 - Added disabled-by-default embedded Time & HR integration and worker handoff switches to the Core Unraid template.
 - Added optional existing Time DB URL, Calendar encryption key, Authentik employee-sync token/issuer, Google callback and remote Tower backup mount.
