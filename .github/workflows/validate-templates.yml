@@ -48,16 +48,17 @@ jobs:
           variables = [c for c in trades.findall("Config") if c.get("Type") == "Variable"]
           targets = [c.get("Target") for c in variables]
           assert len(set(targets)) == len(targets), "Duplicate environment variables"
-          for name in ("DATABASE_URL", "SESSION_SECRET", "ENCRYPTION_KEY",
-                       "ALLOWED_EMAILS", "PUBLIC_BASE_URL", "OIDC_DISCOVERY_URL",
-                       "OIDC_CLIENT_ID", "OIDC_CLIENT_SECRET"):
-              assert name in targets, f"Missing required Trades setting: {name}"
-          for c in variables:
-              if c.get("Target") in ("DATABASE_URL", "SESSION_SECRET", "ENCRYPTION_KEY",
-                                     "OIDC_CLIENT_SECRET"):
-                  assert not c.get("Default") and not (c.text or "").strip(), "Unsafe secret default"
-                  assert c.get("Mask") == "true", f"Secret not masked: {c.get('Target')}"
+          paths = [c for c in trades.findall("Config") if c.get("Type") == "Path"]
+          assert len(paths) == 1 and paths[0].get("Target") == "/data"
+          assert paths[0].get("Default") == "/mnt/user/appdata/cngi-trades"
+          assert all(c.get("Required") == "false" for c in variables)
+          for name in ("ALLOWED_EMAILS", "SESSION_SECRET", "ENCRYPTION_KEY",
+                       "OIDC_DISCOVERY_URL", "OIDC_CLIENT_ID", "OIDC_CLIENT_SECRET"):
+              assert name not in targets, "Configuration belongs inside CNGI Trades: " + name
+          db = [c for c in variables if c.get("Target") == "DATABASE_URL"]
+          assert len(db) == 1
+          assert db[0].get("Mask") == "true" and not (db[0].text or "").strip()
           assert trades.findtext("TemplateURL") == ("https://raw.githubusercontent.com/"
                  "JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-trades.xml")
-          print("CNGI Trades template safety/required-fields validation passed")
+          print("CNGI Trades first-run (port and appdata) validation passed")
           PY
