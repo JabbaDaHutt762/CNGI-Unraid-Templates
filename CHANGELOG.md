@@ -1,3 +1,10 @@
+## 2026-11-20 — CNGI Trades simplified appdata-first install
+- Removed required Docker environment variables for database, email allowlist, encryption keys and Authentik.
+- Added persistent /data appdata mapping; initial SQLite, session secret and encryption key are generated inside the container.
+- Users connect brokerage accounts only after Authentik sign-in. Authentik controls family app access.
+- Updated Unraid install guide and template validator for one-click first launch.
+- Existing CNGI Core container and databases were not changed.
+
 ## 2026-11-20 — CNGI Trades Unraid install support
 - Added `templates/cngi-trades.xml` DockerMan v2 template for test-gated GHCR `latest` image.
 - Maps Unraid 8191 to application 8080 with isolated PostgreSQL 18 database and Authentik connection fields.
