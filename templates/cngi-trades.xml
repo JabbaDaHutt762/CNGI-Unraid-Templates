@@ -9,8 +9,8 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/JabbaDaHutt762/CNGI-Trades/issues</Support>
   <Project>https://github.com/JabbaDaHutt762/CNGI-Trades</Project>
-  <Overview>CNGI Trades is a private family-only multi-user trading workspace. Each family member connects their own isolated Alpaca PAPER account. Version 0.1.2 is read-only and locked: NO live trades or automated paper orders. Requires its own database on PostgreSQL 18 and Authentik OIDC.</Overview>
-  <Category>Tools: Finance:</Category>
+  <Overview>CNGI Trades private family trading workspace. Zero required setup variables: initializes a local database and secrets in appdata. Configure Authentik later through /setup; family access is managed in Authentik, and brokerage accounts are connected separately by each user. Trading is disabled in this foundation release.</Overview>
+  <Category>Tools:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-trades.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/icons/cngi-icon-v2.webp</Icon>
@@ -20,17 +20,11 @@
   <DateInstalled/>
   <DonateText/>
   <DonateLink/>
-  <Requires>Dedicated cngi_trades database and dedicated least-privilege login on PostgreSQL 18, Authentik OIDC client, and Nginx Proxy Manager HTTPS forwarding to host port 8191. If GHCR package is private, authenticate Docker to ghcr.io first.</Requires>
-
-  <Config Name="WebUI Port" Target="8080" Default="8191" Mode="tcp" Description="Unraid host port 8191 maps to Trades container port 8080. Point trades.clemonsnextgen.com proxy here." Type="Port" Display="always" Required="true" Mask="false">8191</Config>
-  <Config Name="Database URL" Target="DATABASE_URL" Default="" Mode="" Description="DEDICATED Trades PostgreSQL 18 database connection, never CNGI Core database. Format: postgresql+psycopg://trades:ENCODED_PASSWORD@POSTGRES_HOST:5432/cngi_trades. PostgreSQL must be reachable from this container." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Unique random string of at least 32 characters. Do not reuse CNGI Core's session secret." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Broker Credential Encryption Key" Target="ENCRYPTION_KEY" Default="" Mode="" Description="Fernet encryption key (generate once; preserve backups). Changing this key makes existing encrypted broker credentials unreadable. Do not reuse Core's key." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Allowed Family Login Emails" Target="ALLOWED_EMAILS" Default="" Mode="" Description="Comma-separated verified email addresses authorized for this family-only app; no public registration." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Public Trades URL" Target="PUBLIC_BASE_URL" Default="https://trades.clemonsnextgen.com" Mode="" Description="Canonical HTTPS address used for OIDC callback and secure session cookies. Login requires HTTPS through your proxy." Type="Variable" Display="always" Required="true" Mask="false">https://trades.clemonsnextgen.com</Config>
-  <Config Name="Authentik OIDC Discovery URL" Target="OIDC_DISCOVERY_URL" Default="" Mode="" Description="Full Authentik OpenID discovery endpoint for the CNGI Trades provider, ending in /.well-known/openid-configuration. Use the URL shown by Authentik." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Authentik Client ID" Target="OIDC_CLIENT_ID" Default="" Mode="" Description="Unique OAuth/OpenID client ID assigned to CNGI Trades in Authentik." Type="Variable" Display="always" Required="true" Mask="false"/>
-  <Config Name="Authentik Client Secret" Target="OIDC_CLIENT_SECRET" Default="" Mode="" Description="Client secret from the CNGI Trades Authentik OAuth/OpenID provider; never expose or commit." Type="Variable" Display="always" Required="true" Mask="true"/>
-  <Config Name="Trusted Proxy IPs" Target="TRUSTED_PROXY_IPS" Default="127.0.0.1" Mode="" Description="Optional comma-separated reverse proxy source IPs allowed to supply forwarded headers. Never set * when accessible to untrusted clients." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
-  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Log and host timezone. Market schedule will later use America/New_York." Type="Variable" Display="advanced" Required="true" Mask="false">America/New_York</Config>
+  <Requires>Unraid port 8191 and persistent appdata /data. Optional private GHCR login for pulling Docker image.</Requires>
+  <Config Name="WebUI Port" Target="8080" Default="8191" Mode="tcp" Description="Host port 8191 for the dashboard, proxy to this port later." Type="Port" Display="always" Required="true" Mask="false">8191</Config>
+  <Config Name="App Data" Target="/data" Default="/mnt/user/appdata/cngi-trades" Mode="rw" Description="Persistent local database, encryption key and setup settings. Back up the whole folder, including hidden files." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/cngi-trades</Config>
+  <Config Name="Public Trades URL" Target="PUBLIC_BASE_URL" Default="https://trades.clemonsnextgen.com" Mode="" Description="Public HTTPS URL for Authentik callback and secure login cookies. Normally leave as is." Type="Variable" Display="advanced" Required="false" Mask="false">https://trades.clemonsnextgen.com</Config>
+  <Config Name="Trusted Proxy IPs" Target="TRUSTED_PROXY_IPS" Default="127.0.0.1" Mode="" Description="Advanced: IP addresses of trusted reverse proxies. Do not set to wildcard." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
+  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Application timezone." Type="Variable" Display="advanced" Required="false" Mask="false">America/New_York</Config>
+  <Config Name="Optional PostgreSQL Database" Target="DATABASE_URL" Default="" Mode="" Description="Advanced optional external database for new installs; leave blank for local SQLite. Changing later does not migrate data automatically." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
 </Container>
