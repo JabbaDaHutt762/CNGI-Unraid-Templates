@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Container version="2">
   <Name>CNGI-Trades</Name>
-  <Repository>ghcr.io/jabbadahutt762/cngi-trades:0.1.2</Repository>
+  <Repository>ghcr.io/jabbadahutt762/cngi-trades:latest</Repository>
   <Registry>https://github.com/JabbaDaHutt762/CNGI-Trades/pkgs/container/cngi-trades</Registry>
   <Network>bridge</Network>
   <MyIP/>
