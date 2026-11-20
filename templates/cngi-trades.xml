@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container version="2">
+  <Name>CNGI-Trades</Name>
+  <Repository>ghcr.io/jabbadahutt762/cngi-trades:0.1.2</Repository>
+  <Registry>https://github.com/JabbaDaHutt762/CNGI-Trades/pkgs/container/cngi-trades</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/JabbaDaHutt762/CNGI-Trades/issues</Support>
+  <Project>https://github.com/JabbaDaHutt762/CNGI-Trades</Project>
+  <Overview>CNGI Trades is a private family-only multi-user trading workspace. Each family member connects their own isolated Alpaca PAPER account. Version 0.1.2 is read-only and locked: NO live trades or automated paper orders. Requires its own database on PostgreSQL 18 and Authentik OIDC.</Overview>
+  <Category>Tools: Finance:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-trades.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/JabbaDaHutt762/CNGI-Unraid-Templates/main/icons/cngi-icon-v2.webp</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires>Dedicated cngi_trades database and dedicated least-privilege login on PostgreSQL 18, Authentik OIDC client, and Nginx Proxy Manager HTTPS forwarding to host port 8191. If GHCR package is private, authenticate Docker to ghcr.io first.</Requires>
+
+  <Config Name="WebUI Port" Target="8080" Default="8191" Mode="tcp" Description="Unraid host port 8191 maps to Trades container port 8080. Point trades.clemonsnextgen.com proxy here." Type="Port" Display="always" Required="true" Mask="false">8191</Config>
+  <Config Name="Database URL" Target="DATABASE_URL" Default="" Mode="" Description="DEDICATED Trades PostgreSQL 18 database connection, never CNGI Core database. Format: postgresql+psycopg://trades:ENCODED_PASSWORD@POSTGRES_HOST:5432/cngi_trades. PostgreSQL must be reachable from this container." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode="" Description="Unique random string of at least 32 characters. Do not reuse CNGI Core's session secret." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Broker Credential Encryption Key" Target="ENCRYPTION_KEY" Default="" Mode="" Description="Fernet encryption key (generate once; preserve backups). Changing this key makes existing encrypted broker credentials unreadable. Do not reuse Core's key." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Allowed Family Login Emails" Target="ALLOWED_EMAILS" Default="" Mode="" Description="Comma-separated verified email addresses authorized for this family-only app; no public registration." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Public Trades URL" Target="PUBLIC_BASE_URL" Default="https://trades.clemonsnextgen.com" Mode="" Description="Canonical HTTPS address used for OIDC callback and secure session cookies. Login requires HTTPS through your proxy." Type="Variable" Display="always" Required="true" Mask="false">https://trades.clemonsnextgen.com</Config>
+  <Config Name="Authentik OIDC Discovery URL" Target="OIDC_DISCOVERY_URL" Default="" Mode="" Description="Full Authentik OpenID discovery endpoint for the CNGI Trades provider, ending in /.well-known/openid-configuration. Use the URL shown by Authentik." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Authentik Client ID" Target="OIDC_CLIENT_ID" Default="" Mode="" Description="Unique OAuth/OpenID client ID assigned to CNGI Trades in Authentik." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Authentik Client Secret" Target="OIDC_CLIENT_SECRET" Default="" Mode="" Description="Client secret from the CNGI Trades Authentik OAuth/OpenID provider; never expose or commit." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Trusted Proxy IPs" Target="TRUSTED_PROXY_IPS" Default="127.0.0.1" Mode="" Description="Optional comma-separated reverse proxy source IPs allowed to supply forwarded headers. Never set * when accessible to untrusted clients." Type="Variable" Display="advanced" Required="false" Mask="false">127.0.0.1</Config>
+  <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Log and host timezone. Market schedule will later use America/New_York." Type="Variable" Display="advanced" Required="true" Mask="false">America/New_York</Config>
+</Container>
