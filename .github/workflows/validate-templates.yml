@@ -1,0 +1,63 @@
+name: Validate Unraid DockerMan templates
+on:
+  push:
+    paths:
+      - 'templates/**'
+      - '.github/workflows/validate-templates.yml'
+  pull_request:
+    paths:
+      - 'templates/**'
+      - '.github/workflows/validate-templates.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Parse all templates and check Trades configuration
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+
+          templates = sorted(Path("templates").glob("*.xml"))
+          assert templates, "No templates found"
+          for file in templates:
+              root = ET.parse(file).getroot()
+              assert root.tag == "Container", file
+              assert root.attrib.get("version") == "2", file
+              assert root.findtext("Repository"), file
+              assert root.findtext("Icon"), file
+              assert root.findtext("WebUI"), file
+              print("OK", file)
+
+          trades = ET.parse("templates/cngi-trades.xml").getroot()
+          assert trades.findtext("Name") == "CNGI-Trades"
+          assert trades.findtext("Repository") == "ghcr.io/jabbadahutt762/cngi-trades:latest"
+          assert trades.findtext("Network") == "bridge"
+          assert trades.findtext("Privileged") == "false"
+          ports = [c for c in trades.findall("Config") if c.get("Type") == "Port"]
+          assert len(ports) == 1
+          assert ports[0].get("Target") == "8080" and ports[0].get("Default") == "8191"
+          variables = [c for c in trades.findall("Config") if c.get("Type") == "Variable"]
+          targets = [c.get("Target") for c in variables]
+          assert len(set(targets)) == len(targets), "Duplicate environment variables"
+          for name in ("DATABASE_URL", "SESSION_SECRET", "ENCRYPTION_KEY",
+                       "ALLOWED_EMAILS", "PUBLIC_BASE_URL", "OIDC_DISCOVERY_URL",
+                       "OIDC_CLIENT_ID", "OIDC_CLIENT_SECRET"):
+              assert name in targets, f"Missing required Trades setting: {name}"
+          for c in variables:
+              if c.get("Target") in ("DATABASE_URL", "SESSION_SECRET", "ENCRYPTION_KEY",
+                                     "OIDC_CLIENT_SECRET"):
+                  assert not c.get("Default") and not (c.text or "").strip(), "Unsafe secret default"
+                  assert c.get("Mask") == "true", f"Secret not masked: {c.get('Target')}"
+          assert trades.findtext("TemplateURL") == ("https://raw.githubusercontent.com/"
+                 "JabbaDaHutt762/CNGI-Unraid-Templates/main/templates/cngi-trades.xml")
+          print("CNGI Trades template safety/required-fields validation passed")
+          PY
