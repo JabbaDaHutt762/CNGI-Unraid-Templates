@@ -1,3 +1,6 @@
+## 2026-11-26 — Core organization registry migration
+- Point Core fresh installs to the organization GHCR image; retain public template and icon URLs and all existing configuration fields. Existing containers require a separate authenticated image pull and deliberate repository-field change; preserve all appdata and settings. Old personal image remains rollback.
+
 ## 2026-11-20 — CNGI Trades simplified appdata-first install
 - Removed required Docker environment variables for database, email allowlist, encryption keys and Authentik.
 - Added persistent /data appdata mapping; initial SQLite, session secret and encryption key are generated inside the container.
