@@ -1,3 +1,6 @@
+## 2026-11-26 — WebPortal organization registry migration
+- Update WebPortal image and repository links only; preserve port 8190, all configuration, public icon and template links. Existing installations pull the verified new image before changing the repository field. No live deployment changes.
+
 ## 2026-11-26 — Core organization registry migration
 - Point Core fresh installs to the organization GHCR image; retain public template and icon URLs and all existing configuration fields. Existing containers require a separate authenticated image pull and deliberate repository-field change; preserve all appdata and settings. Old personal image remains rollback.
 
