@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>CNGI-Core</Name>
-  <Repository>ghcr.io/jabbadahutt762/jarvis-cngi-core:latest</Repository>
-  <Registry>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Core/pkgs/container/jarvis-cngi-core</Registry>
+  <Repository>ghcr.io/clemonsnextgen/jarvis-cngi-core:latest</Repository>
+  <Registry>https://github.com/ClemonsNextGen/Jarvis-CNGI-Core/pkgs/container/jarvis-cngi-core</Registry>
   <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Core/issues</Support>
-  <Project>https://github.com/JabbaDaHutt762/Jarvis-CNGI-Core</Project>
+  <Support>https://github.com/ClemonsNextGen/Jarvis-CNGI-Core/issues</Support>
+  <Project>https://github.com/ClemonsNextGen/Jarvis-CNGI-Core</Project>
   <Overview>CNGI Core CRM and business platform. Production runs from the published GHCR image and updates through the normal Unraid Docker update workflow.</Overview>
   <Category>Tools:</Category>
   <WebUI>http://[IP]:[PORT:8189]/</WebUI>
