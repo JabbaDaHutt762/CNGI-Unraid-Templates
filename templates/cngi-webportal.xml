@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>CNGI-WebPortal</Name>
-  <Repository>ghcr.io/jabbadahutt762/cngi-webportal:latest</Repository>
-  <Registry>https://github.com/JabbaDaHutt762/CNGI-WebPortal/pkgs/container/cngi-webportal</Registry>
+  <Repository>ghcr.io/clemonsnextgen/cngi-webportal:latest</Repository>
+  <Registry>https://github.com/ClemonsNextGen/CNGI-WebPortal/pkgs/container/cngi-webportal</Registry>
   <Network>bridge</Network>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/JabbaDaHutt762/CNGI-WebPortal</Support>
+  <Support>https://github.com/ClemonsNextGen/CNGI-WebPortal</Support>
   <Project>https://clemonsnextgen.com</Project>
   <Overview>Public website and secure portal entry point for Robert Clemons A/C and Clemons NextGen Integrations.</Overview>
   <Category>Productivity: Tools:</Category>
